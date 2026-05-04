@@ -25,7 +25,7 @@ Warning Fish
 Danger Fish
 :::
 
-### Fish
+### Smaller Fish
 Still Negligible
 
 :::tip This fish also supports custom names
@@ -34,7 +34,7 @@ Wowza!
 **Two**
 :::
 
-# Code Block !!!
+## Code Block !!!
 ```js
 const MAJOR_TMT_UPDATES = 3;
 let aca = "Acamaeda";
@@ -43,3 +43,89 @@ for (let i = 0; i < MAJOR_TMT_UPDATES; i++) {
     aca += acceptableVowels[i % 2];
 }
 ```
+
+## A large amount of text to test the table of contents
+N
+
+E
+
+G
+
+L
+
+I
+
+G
+
+I
+
+B
+
+L
+
+E
+<br><br><br>
+F
+
+I
+
+S
+
+H
+<br><br><br>
+N
+
+E
+
+G
+
+L
+
+I
+
+G
+
+I
+
+B
+
+L
+
+E
+<br><br><br>
+F
+
+I
+
+S
+
+H
+<br><br><br>
+N
+
+E
+
+G
+
+L
+
+I
+
+G
+
+I
+
+B
+
+L
+
+E
+<br><br><br>
+F
+
+I
+
+S
+
+H
+<br><br><br>

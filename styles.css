@@ -16,6 +16,9 @@ body {
 p {
     line-height: 1;
 }
+button {
+    cursor: pointer;
+}
 
 #docContainer {
     display: grid;
@@ -28,7 +31,7 @@ p {
 
 #page {
     width: 75%;
-    margin: auto;
+    margin: 0.1rem auto;
 }
 
 #page h1 {
@@ -80,7 +83,7 @@ p {
 
 .container-title {
     margin: 0 0 0.5rem;
-    font-weight: 750;
+    font-weight: bold;
 }
 
 .container-body > :last-child {
@@ -128,4 +131,35 @@ p {
 .sidebar-link:hover {
     color: var(--text);
     background: var(--background-medium);
+}
+
+.contents-container {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.contents-title {
+    margin: 0.75rem 0 0.75rem;
+    color: var(--text);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.contents-link {
+    display: block;
+    border: none;
+    background: none;
+    padding: 0;
+
+    color: var(--text-medium);
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+.contents-link:hover {
+    color: var(--text);
+}
+
+.contents-h3 {
+    padding-left: 1rem;
 }
