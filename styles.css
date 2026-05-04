@@ -1,0 +1,97 @@
+:root {
+    --background: #0f1115;
+    --background-medium: #171a21;
+    --background-light: #20242d;
+    --border: #272a31;
+    --text: #f3f4f6;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+p {
+    line-height: 1;
+}
+
+#page {
+    max-width: 50%;
+    margin: auto;
+}
+
+#page h1 {
+    margin: 0 0 1.5rem;
+    font-size: 2.2rem;
+}
+
+#page h2 {
+    margin-top: 2.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 1.6rem;
+}
+
+#page h3 {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+}
+
+#page code {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.15rem 0.35rem;
+    background: var(--background-medium);
+}
+
+#page pre {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 1rem;
+    background: var(--background-medium);
+}
+
+#page pre code {
+    border: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.container {
+    margin: 1.25rem 0;
+    padding: 1rem 1.1rem;
+
+    border: 1px solid var(--container-border);
+    border-radius: 5px;
+
+    background: var(--container-bg);
+}
+
+.container-title {
+    margin: 0 0 0.5rem;
+    font-weight: 750;
+}
+
+.container-body > :last-child {
+    margin-bottom: 0;
+}
+
+.container-note {
+    --container-border: #71717a;
+    --container-bg: rgba(113, 113, 122, 0.12);
+}
+
+.container-tip {
+    --container-border: #189345;
+    --container-bg: rgba(24, 147, 69, 0.1);
+}
+
+.container-warning {
+    --container-border: #b4750a;
+    --container-bg: rgba(180, 117, 10, 0.1);
+}
+
+.container-danger {
+    --container-border: #9b2b2b;
+    --container-bg: rgba(155, 43, 43, 0.1);
+}
