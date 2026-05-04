@@ -37,6 +37,7 @@ button {
 #page {
     width: 75%;
     margin: 0.1rem auto;
+    counter-reset: section;
 }
 
 #page h1 {
@@ -49,11 +50,26 @@ button {
     padding-top: 1rem;
     border-top: 1px solid var(--border);
     font-size: 1.6rem;
+    counter-increment: section;
+    counter-reset: subsection;
+}
+
+#page h2::before {
+    content: counter(section) " ";
+    color: var(--text-dark);
+    font-weight: lighter;
 }
 
 #page h3 {
     margin-top: 2rem;
     font-size: 1.25rem;
+    counter-increment: subsection;
+}
+
+#page h3::before {
+    content: counter(section) "." counter(subsection) " ";
+    color: var(--text-dark);
+    font-weight: lighter;
 }
 
 #page code {
@@ -141,6 +157,7 @@ button {
 .contents-container {
     display: grid;
     gap: 0.5rem;
+    counter-reset: content-section;
 }
 
 .contents-title {
@@ -165,6 +182,20 @@ button {
     color: var(--text);
 }
 
+.contents-h2 {
+    counter-increment: content-section;
+    counter-reset: content-subsection;
+}
+
+.contents-h2::before {
+    content: counter(content-section);
+}
+
 .contents-h3 {
     padding-left: 1rem;
+    counter-increment: content-subsection;
+}
+
+.contents-h3::before {
+    content: counter(content-section) "." counter(content-subsection);
 }
