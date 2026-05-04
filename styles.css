@@ -4,6 +4,8 @@
     --background-light: #20242d;
     --border: #272a31;
     --text: #f3f4f6;
+    --text-medium: #c5c5c5;
+    --text-dark: #6b7280;
 }
 
 body {
@@ -15,8 +17,17 @@ p {
     line-height: 1;
 }
 
+#docContainer {
+    display: grid;
+    grid-template-columns: 280px 1fr 240px;
+    gap: 2rem;
+
+    width: 100%;
+    margin: 0 auto;
+}
+
 #page {
-    max-width: 50%;
+    width: 75%;
     margin: auto;
 }
 
@@ -94,4 +105,27 @@ p {
 .container-danger {
     --container-border: #9b2b2b;
     --container-bg: rgba(155, 43, 43, 0.1);
+}
+
+.sidebar-link {
+    display: block;
+
+    margin: 0.1rem 0;
+    padding: 0.45rem calc(0.45rem + var(--depth, 0) * 1rem);
+
+    border-radius: 5px;
+
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.sidebar-link.active {
+    color: var(--text-medium);
+    font-weight: bold;
+}
+
+.sidebar-link:hover {
+    color: var(--text);
+    background: var(--background-medium);
 }
