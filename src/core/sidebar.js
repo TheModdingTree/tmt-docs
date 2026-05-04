@@ -7,7 +7,7 @@ export function renderSidebar(pages, currentPath) {
     const realPages = pages.filter(page => page.path !== "/");
 
     return `
-        <a class="sidebar-link ${currentPath === "/" ? "active" : ""}" href="#/">Home</a>
+        <a class="sidebar-link ${currentPath === "/" ? "active" : ""}" href="#/">The Modding Tree</a>
         ${realPages.map(page => {
             const depth = getPageDepth(page.path);
             return `

@@ -1,3 +1,0 @@
-# Bastion Of The Turbofish
-
-::<>
