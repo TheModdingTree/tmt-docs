@@ -40,22 +40,29 @@ function makeShorthandMap(pages) {
 
     return map;
 }
-
 const shorthands = makeShorthandMap(pages);
+
+function splitLink(link) {
+    const [path, query = ""] = link.split("?");
+    return { path, query };
+}
+function appendQuery(path, query) {
+    return query ? `${path}?${query}` : `${path}?s=1`;
+}
 
 export function initPageLinks(page){
     for(const element of page.querySelectorAll("a[href]")){
-        const link = element.getAttribute("href");
+        const link = splitLink(element.getAttribute("href"));
 
-        if(isExternal(link)){
+        if(isExternal(link.path)){
             element.className = "external-link";
             element.rel = "external";
             element.target = "_blank";
             continue;
         }
 
-        const cleanLink = isShorthand(link) ? shorthands.get(link) : `/${link}`;
+        const cleanLink = isShorthand(link.path) ? shorthands.get(link.path) : `/${link.path}`;
         element.className = "page-link";
-        element.setAttribute("href", `#${cleanLink}`);
+        element.setAttribute("href", `/#${appendQuery(cleanLink, link.query)}`);
     }
 }

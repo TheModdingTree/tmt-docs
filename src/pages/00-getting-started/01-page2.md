@@ -53,6 +53,8 @@ Go to [00/02](00/02), also known as """Mod Setup"""
 
 Go to [01](01), also known as Migration
 
+Go to [Section 2.1 of the tour](00/00?s=2.1)
+
 Go to [nxf.me](https://www.nxf.me) (wowie, external links look different)
 
 Go [home]()
