@@ -1,5 +1,5 @@
 import "../styles.css";
-import "highlight.js/styles/atom-one-dark.css";
+import "../node_modules/highlight.js/styles/atom-one-dark.css";
 
 import {getCurrentPage} from "./core/router.js";
 import {getPage, pages} from "./core/pages.js";
