@@ -1,3 +1,5 @@
+import {getCleanURL} from "./router.js";
+
 function getPageDepth(path) {
     if (path === "/") return 0;
     return path.split("/").length;
@@ -14,7 +16,7 @@ export function renderSidebar(pages, currentPath) {
                 <a 
                     class="sidebar-link ${currentPath === page.path ? "active" : ""}"
                     style="--depth: ${Math.max(0, depth - 2)}"
-                    href="#${page.path}"
+                    href="${getCleanURL(page.path)}"
                 >
                     ${page.title}
                 </a>

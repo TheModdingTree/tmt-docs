@@ -10,3 +10,7 @@ export function getCurrentPage() {
 export function setCurrentSection(section) {
     location.hash = `${getCurrentPage().path}?s=${section}`;
 }
+
+export function getCleanURL(path) {
+    return `${import.meta.env.BASE_URL}#${path}`;
+}

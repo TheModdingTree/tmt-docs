@@ -1,4 +1,5 @@
 import {pages} from "./pages.js";
+import {getCleanURL} from "./router.js";
 
 function isExternal(link){
     const regex = /^[a-zA-Z][a-zA-Z\d+.-]*:/;
@@ -63,6 +64,6 @@ export function initPageLinks(page){
 
         const cleanLink = isShorthand(link.path) ? shorthands.get(link.path) : `/${link.path}`;
         element.className = "page-link";
-        element.setAttribute("href", `/#${appendQuery(cleanLink, link.query)}`);
+        element.setAttribute("href", `${getCleanURL(appendQuery(cleanLink, link.query))}`);
     }
 }
