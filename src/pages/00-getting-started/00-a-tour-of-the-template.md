@@ -6,7 +6,7 @@ index.js is your Mod's entrypoint and where your actual Mod definition goes.
 Every index.js does the same thing (from top to bottom):
 1. Imports necessary items from the SDK (more on the SDK in [TODO])
 2. Imports your Layer files (more on Layer files in [TODO])
-3. Creates your actual Mod using `createMod` (more on Mod setup in [Mod Setup])
+3. Creates your actual Mod using `createMod` (more on Mod setup in [Mod Setup](getting-started/mod-setup))
 4. Creates and exports your Startup Options (more on Startup Options in [Mod Setup])
 5. Exports your Mod!
 

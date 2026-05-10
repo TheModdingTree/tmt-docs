@@ -6,6 +6,7 @@ import {getPage, pages} from "./core/pages.js";
 import {getMarkdownTitle, renderMarkdown} from "./core/render.js";
 import {renderSidebar} from "./core/sidebar.js";
 import {initTableOfContents, renderTableOfContents} from "./core/contents.js";
+import {initPageLinks} from "./core/links.js";
 
 const sidebar = document.getElementById("sidebar");
 const htmlPage = document.getElementById("page");
@@ -29,6 +30,7 @@ async function render() {
     sidebar.innerHTML = renderSidebar(pages, page.path);
     htmlPage.innerHTML = renderMarkdown(source);
     contents.innerHTML = renderTableOfContents(htmlPage);
+    initPageLinks(htmlPage);
 }
 
 window.addEventListener("hashchange", render);

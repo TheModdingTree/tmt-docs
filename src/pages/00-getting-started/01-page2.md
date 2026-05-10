@@ -44,6 +44,19 @@ for (let i = 0; i < MAJOR_TMT_UPDATES; i++) {
 }
 ```
 
+## ↗ Link Testing Zone ↗
+Go to [the tour](getting-started/a-tour-of-the-template)
+
+Go to [Getting Started](getting-started)
+
+Go to [00/02](00/02), also known as """Mod Setup"""
+
+Go to [01](01), also known as Migration
+
+Go to [nxf.me](https://www.nxf.me) (wowie, external links look different)
+
+Go [home]()
+
 ## A large amount of text to test the table of contents
 N
 

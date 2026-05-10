@@ -6,6 +6,7 @@
     --text: #f3f4f6;
     --text-medium: #c5c5c5;
     --text-dark: #6b7280;
+    --link: #86b9bd
 }
 
 body {
@@ -198,4 +199,19 @@ button {
 
 .contents-h3::before {
     content: counter(content-section) "." counter(content-subsection);
+}
+
+.page-link, .external-link {
+    color: var(--link);
+    text-decoration: none;
+}
+
+.page-link:hover, .external-link:hover {
+    color: var(--text);
+    text-decoration: underline;
+}
+
+.external-link::after {
+    content: " ↗";
+    font-size: 0.8rem;
 }
