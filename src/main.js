@@ -1,6 +1,3 @@
-import "../styles.css";
-import "../node_modules/highlight.js/styles/atom-one-dark.css";
-
 import {getCurrentPage} from "./core/router.js";
 import {getPage, pages} from "./core/pages.js";
 import {getMarkdownTitle, renderMarkdown} from "./core/render.js";
