@@ -1,5 +1,5 @@
 function cleanPath(path){
-    return path.replace("../pages/", "").replace(".md", "");
+    return path.replace("../pages/", "").replace(".md", "").split("/").map(part => part.replace(/^\d+-/, "")).join("/");
 }
 
 function normalizePath(path){
@@ -30,7 +30,7 @@ export const pages = Object.entries(modules)
         path: normalizePath(realPath),
         title: getTitleFromPath(realPath),
         load: loadMarkdown
-    })).sort((a, b) => a.path.localeCompare(b.path));
+    })).sort((a, b) => a.realPath.localeCompare(b.realPath));
 
 export function getPage(path){
     return pages.find(page => page.path === path) ?? null; // EVIL dynamic typing shenanigans for error checking.
