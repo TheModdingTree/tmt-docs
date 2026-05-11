@@ -1,5 +1,11 @@
 # The Modding Tree
 
+:::warning Under Construction!
+You've reached the TMT Wiki! This wiki is currently being written in preparation for the release of TMT 3.0 and is 
+massively incomplete. Feel free to look around and see what's going on, but do take **everything** with a grain of salt,
+the new engine and therefore its wiki could easily change from what you see here prior to its release.
+:::
+
 Welcome to The Modding Tree! 
 
 Take a brief glance at the pages listed on the right side of your screen to see things that might interest you.
