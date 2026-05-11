@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
 @import "highlight.js/styles/atom-one-dark.css";
 
 :root {
@@ -14,6 +15,7 @@
 body {
     background: var(--background);
     color: var(--text);
+    font-family: "Inconsolata", serif;
 }
 
 p {
@@ -26,6 +28,7 @@ li {
 
 button {
     cursor: pointer;
+    font-family: "Inconsolata", serif;
 }
 
 #docContainer {
