@@ -10,7 +10,7 @@ download your project).
 
 :::warning
 If you've used GitHub in the past, you may have installed GitHub Desktop. While you can technically download your
-project using GitHub Desktop, we still recommend installing Git Bash to ensure TMT's update scripts that run Git
+project using GitHub Desktop, we still recommend installing Git to ensure TMT's update scripts that run Git
 commands work properly. 
 :::
 
