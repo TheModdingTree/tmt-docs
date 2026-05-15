@@ -71,3 +71,59 @@ A top-level `ui` property which expects an object with the following subproperti
 
 If any properties are not specified their defaults will be used. If the `ui` property as a whole is not specified all
 defaults will be used.
+
+## An Example
+A mod using all of these properties would look like this:
+```javascript
+const mod = createMod({
+    // Required Properties
+    layers: [ prestigeLayer, superPrestigeLayer ],
+    info: {
+        id: "MyMod", // This is technically the only required info property.
+        name: "The Mod",
+        author: "FlamemasterNXF",
+        version: "1.0",
+        pointsName: "Pointy Points",
+        startPoints: new Decimal(345),
+        defaultHotkey: {
+            enabled: false, // Disabled for demonstrative purposes, disabling it and also setting key makes no sense.
+            key: "g"
+        }
+    },
+  
+    // Optional Properties
+    nodes: [ myNode, myOtherNode ],
+    actions: { // Very rudimentary action example
+        "prestige/explodePoints"(state, action){
+            if(action.shouldExplode) state.player.points = new Decimal(0);
+        }
+    },
+    systems: [ coolSystem, boringSystem ],
+    ui: {
+        mode: "single",
+        display: [ "Hello!", "This is beneath points." ],
+        startTab: "p",
+        links: [
+            {
+                label: "The Modding Tree Wiki",
+                href: "https://wiki.tmt.land"
+            }
+        ],
+        layer: {
+            showLayerName: true,
+            showSectionNames: true
+        },
+        tabs: {
+            equalWidthByDepth: false
+        },
+        particles: {
+            enabled: false,
+            max: 1000 // Once again, it makes no sense to disable particles but then set this.
+        },
+        popups: {
+            enabled: false,
+            max: Infinity // As usual, setting this but disabling popups makes no sense.
+        }
+    }
+})
+```
