@@ -7,6 +7,7 @@ function normalizePath(path){
 
     if(normalized === "_index") return "/";
     if(normalized.endsWith("/_index")) normalized = normalized.slice(0, -"/_index".length);
+    if(normalized.includes("!")) normalized = normalized.replace("!", "")
 
     return `/${normalized}`;
 }
@@ -16,6 +17,7 @@ function getTitleFromPath(path){
     const end = splits.at(-1) === "_index" ? splits.at(-2) : splits.at(-1);
 
     if(end === undefined) return "home";
+    if(splits.at(-1).startsWith("!")) return end.split("-").map(split => split.charAt(0) + split.slice(1)).join(" ").replace("!", "");
     return end.split("-").map(split => split.charAt(0).toUpperCase() + split.slice(1)).join(" ");
 }
 
