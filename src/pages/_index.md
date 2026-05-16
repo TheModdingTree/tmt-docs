@@ -10,8 +10,8 @@ Welcome to The Modding Tree!
 
 Take a brief glance at the pages listed on the right side of your screen to see things that might interest you.
 
-If you're a beginner, we strongly recommend you start with our [Getting Started Guide](00), it will walk you through
-all you need to know.
+If you're a beginner, it is strongly recommended you start with our [Getting Started Guide](00), it will walk you 
+through all you need to know.
 
 ## What is The Modding Tree?
 

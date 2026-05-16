@@ -10,12 +10,12 @@ download your project).
 
 :::warning
 If you've used GitHub in the past, you may have installed GitHub Desktop. While you can technically download your
-project using GitHub Desktop, we still recommend installing Git to ensure TMT's update scripts that run Git
+project using GitHub Desktop, it is still recommended you install Git to ensure TMT's update scripts that run Git
 commands work properly. 
 :::
 
 :::tip For MacOS or Linux Users
-If you run MacOS or Linux, Git is likely pre-installed on your machine. To check, open up a terminal (we'll be needing 
+If you run MacOS or Linux, Git is likely pre-installed on your machine. To check, open up a terminal (you'll be needing 
 one later anyway) and run `which git`. If it returns a file path and not "git not found" you already have Git!
 :::
 
