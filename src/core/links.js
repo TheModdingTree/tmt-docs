@@ -48,7 +48,7 @@ function splitLink(link) {
     return { path, query };
 }
 function appendQuery(path, query) {
-    return query ? `${path}?${query}` : `${path}?s=1`;
+    return query ? `${path}?${query}` : path;
 }
 
 export function initPageLinks(page){

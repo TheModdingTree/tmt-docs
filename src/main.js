@@ -39,7 +39,10 @@ async function render() {
     initPageLinks(htmlPage);
 
     requestAnimationFrame(() => {
-        scrollToSection(getCurrentPage().section);
+        const section = getCurrentPage().section;
+
+        if (section != null) scrollToSection(section);
+        else window.scrollTo({ top: 0 });
     });
 }
 
