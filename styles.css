@@ -16,6 +16,7 @@ body {
     background: var(--background);
     color: var(--text);
     font-family: "Inconsolata", serif;
+    margin: 0;
 }
 
 p {
@@ -33,11 +34,11 @@ button {
 
 #docContainer {
     display: grid;
-    grid-template-columns: 280px 1fr 240px;
+    grid-template-columns: 15rem 1fr 15rem;
     gap: 2rem;
 
-    width: 100%;
-    margin: 0 auto;
+    width: calc(100% - 16px);
+    margin: 8px;
 }
 
 #page {
@@ -220,3 +221,96 @@ button {
     content: " ↗";
     font-size: 0.8rem;
 }
+
+#topbar {
+    display: none;
+}
+
+#mobileMenuShow {
+    display: none;
+
+    margin-left: auto;
+    margin-right: 1rem;
+
+    border: none;
+    background: none;
+    color: var(--text);
+
+    font-size: 1.5rem;
+}
+
+#mobileMenu {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+
+    display: none;
+    flex-direction: column;
+
+    background: var(--background);
+}
+
+@media (max-width: 960px) {
+    #mobileMenuShow {
+        display: block;
+    }
+
+    #mobileMenuHeader {
+        position: sticky;
+        display: flex;
+        align-items: center;
+
+        height: 64px;
+        border-bottom: 1px solid var(--border);
+        background: var(--background);
+    }
+
+    #mobileMenuHide {
+        border: none;
+        background: none;
+        color: var(--text);
+
+        font-size: 2rem;
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+
+    #mobileMenuPages {
+        padding: 0.1rem 1rem;
+    }
+
+    #mobileMenuPages .sidebar-link {
+        margin: 0.15rem 0;
+        padding: 0.45rem calc(0.45rem + var(--depth, 0) * 1rem);
+
+        color: var(--text-medium);
+        font-size: 1rem;
+    }
+
+    #mobileMenuPages .sidebar-link.active {
+        background: var(--background-light);
+        color: var(--text);
+    }
+
+    #contents, #sidebar {
+        display: none;
+    }
+    #docContainer {
+        display: block;
+        width: calc(100% - 8px);
+    }
+
+    #topbar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+
+        display: flex;
+        align-items: center;
+
+        height: 64px;
+        border-bottom: 1px solid var(--border);
+        background: var(--background);
+    }
+}
+
