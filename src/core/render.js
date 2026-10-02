@@ -33,6 +33,9 @@ markdown.use(anchor, {
     permalink: false
 });
 
+markdown.renderer.rules.table_open = () => '<div class="table-container" tabindex="0" role="region"><table>\n';
+markdown.renderer.rules.table_close = () => '</table></div>\n';
+
 createContainer(markdown, "note", "Note");
 createContainer(markdown, "tip", "Tip");
 createContainer(markdown, "warning", "Warning");

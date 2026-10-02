@@ -34,17 +34,32 @@ button {
 
 #docContainer {
     display: grid;
-    grid-template-columns: 15rem 1fr 15rem;
+    grid-template-columns: 15rem minmax(0, 1fr) 15rem;
     gap: 2rem;
 
     width: calc(100% - 16px);
     margin: 8px;
 }
 
+#sidebar, #contents {
+    position: sticky;
+    top: 8px;
+    align-self: start;
+    max-height: calc(100dvh - 16px);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-dark) transparent;
+}
+
 #page {
     width: 75%;
     margin: 0.1rem auto;
     counter-reset: section;
+}
+
+#contents {
+    max-height: calc(100dvh - 5rem);
 }
 
 #page h1 {
@@ -104,6 +119,43 @@ button {
     min-width: max-content;
 }
 
+#page .table-container {
+    margin: 1.25rem 0;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+}
+
+#page .table-container:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: 2px;
+}
+
+#page table {
+    width: 100%;
+    border-collapse: collapse;
+    line-height: 1.5;
+}
+
+#page th, #page td {
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+#page th {
+    background: var(--background-medium);
+    font-weight: bold;
+}
+
+#page td {
+    border-top: 1px solid var(--border);
+}
+
+#page table .badge {
+    overflow-wrap: normal;
+}
+
 .container {
     margin: 1.25rem 0;
     padding: 1rem 1.1rem;
@@ -147,13 +199,58 @@ button {
     display: block;
 
     margin: 0.1rem 0;
-    padding: 0.45rem calc(0.45rem + var(--depth, 0) * 1rem);
+    padding: 0.45rem;
 
     border-radius: 5px;
 
     color: var(--text-dark);
     text-decoration: none;
     font-size: 0.95rem;
+    overflow-wrap: anywhere;
+}
+
+.sidebar-row {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-row .sidebar-link {
+    flex: 1;
+    min-width: 0;
+}
+
+.sidebar-children {
+    padding-left: 1rem;
+}
+
+.sidebar-toggle {
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 0;
+    border-radius: 5px;
+    background: none;
+    color: var(--text-medium);
+    font-size: 1.25rem;
+}
+
+.sidebar-toggle span {
+    display: inline-block;
+}
+
+.sidebar-toggle[aria-expanded="true"] span {
+    transform: rotate(90deg);
+}
+
+.sidebar-toggle:hover {
+    background: var(--background-medium);
+    color: var(--text);
+}
+
+.sidebar-toggle:focus-visible, .sidebar-link:focus-visible {
+    outline: 2px solid var(--link);
+    outline-offset: -2px;
 }
 
 .sidebar-link.active {
@@ -320,6 +417,7 @@ button {
         align-items: center;
 
         height: 64px;
+        flex-shrink: 0;
         border-bottom: 1px solid var(--border);
         background: var(--background);
     }
@@ -335,12 +433,18 @@ button {
     }
 
     #mobileMenuPages {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+        scrollbar-width: thin;
+        scrollbar-color: var(--text-dark) transparent;
         padding: 0.1rem 1rem;
     }
 
     #mobileMenuPages .sidebar-link {
         margin: 0.15rem 0;
-        padding: 0.45rem calc(0.45rem + var(--depth, 0) * 1rem);
+        padding: 0.45rem;
 
         color: var(--text-medium);
         font-size: 1rem;
