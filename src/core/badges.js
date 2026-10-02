@@ -21,7 +21,7 @@ const badges = {
     }
 };
 
-const pattern = /^\{(?:(type|required when):[ \t]*([^{}\r\n]+)|(required|optional|callback-only|callback|html))}/
+const pattern = /^\{(?:(type|required when|callback):[ \t]*([^{}\r\n]+)|(required|optional|callback-only|callback|html))}/
 export default function initBadges(markdown) {
     markdown.inline.ruler.before("text", "badge", (state, silent) => {
         if (state.src[state.pos] !== "{") return false;
@@ -38,7 +38,9 @@ export default function initBadges(markdown) {
                 ? { label: value, title: `Type: ${value}` }
                 : kind === "conditional"
                     ? { label: `Required when ${value}`, title: `Required only when ${value}` }
-                    : badges[kind];
+                    : kind === "callback" && value
+                        ? { label: `Callback: ${value}`, title: `Accepts a value of the shown type or a callback returning ${value}` }
+                        : badges[kind];
 
             const token = state.push("badge", "span", 0);
             token.content = badge.label;
