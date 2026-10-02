@@ -1,7 +1,7 @@
 import {getCurrentPage} from "./core/router.js";
 import {getPage, pages} from "./core/pages.js";
 import {getMarkdownTitle, renderMarkdown} from "./core/render.js";
-import {renderSidebar} from "./core/sidebar.js";
+import {initSidebar} from "./core/sidebar.js";
 import {initTableOfContents, numberPageSections, renderTableOfContents, scrollToSection} from "./core/contents.js";
 import {initPageLinks} from "./core/links.js";
 import {initMobileMenu, toggleMobileMenu} from "./core/mobile.js";
@@ -11,10 +11,7 @@ const htmlPage = document.getElementById("page");
 const contents = document.getElementById("contents");
 const mobileMenuPages = document.getElementById("mobileMenuPages");
 
-function renderNavigation(path){
-    sidebar.innerHTML = renderSidebar(pages, path);
-    mobileMenuPages.innerHTML = renderSidebar(pages, path);
-}
+const renderNavigation = initSidebar([sidebar, mobileMenuPages], pages);
 
 async function render() {
     const path = getCurrentPage().path;
@@ -32,10 +29,11 @@ async function render() {
 
     document.title = `${title} | TMT Docs`;
     htmlPage.innerHTML = renderMarkdown(source);
+
+    numberPageSections(htmlPage);
     contents.innerHTML = renderTableOfContents(htmlPage);
 
     renderNavigation(page.path);
-    numberPageSections(htmlPage)
     initPageLinks(htmlPage);
 
     requestAnimationFrame(() => {
