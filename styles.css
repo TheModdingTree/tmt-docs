@@ -227,6 +227,60 @@ button {
     font-size: 0.8rem;
 }
 
+.badge {
+    display: inline-block;
+    max-width: 100%;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin: 0.15rem 0;
+    padding: 0.12rem 0.45rem;
+    border: 1px solid var(--badge-border, var(--border));
+    border-radius: 5px;
+    background: var(--badge-background, var(--background-medium));
+    color: var(--badge-color, var(--text-medium));
+    font-size: 0.8rem;
+    font-weight: normal;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.type-badge {
+    --badge-color: #b7d1ef;
+    --badge-border: rgba(165, 201, 245, 0.22);
+    --badge-background: rgba(165, 201, 245, 0.07);
+    font-family: monospace;
+}
+
+.required-badge {
+    --badge-color: #dcc3c1;
+    --badge-border: rgba(220, 177, 173, 0.2);
+    --badge-background: rgba(220, 177, 173, 0.06);
+}
+
+.optional-badge {
+    --badge-color: #c5c9d0;
+    --badge-border: rgba(183, 190, 203, 0.18);
+    --badge-background: rgba(183, 190, 203, 0.05);
+}
+
+.conditional-badge {
+    --badge-color: #f1d094;
+    --badge-border: rgba(230, 193, 123, 0.4);
+    --badge-background: rgba(230, 193, 123, 0.12);
+}
+
+.callback-badge, .callback-only-badge {
+    --badge-color: #d3c3f0;
+    --badge-border: rgba(197, 175, 240, 0.22);
+    --badge-background: rgba(197, 175, 240, 0.07);
+}
+
+.html-badge {
+    --badge-color: #a8d9c5;
+    --badge-border: rgba(138, 203, 178, 0.22);
+    --badge-background: rgba(138, 203, 178, 0.07);
+}
+
 #topbar {
     display: none;
 }
@@ -318,4 +372,3 @@ button {
         background: var(--background);
     }
 }
-

@@ -1,62 +1,130 @@
 # defineMod()
 
-defineMod() is the entrypoint to making a game with TMT. It should be called once per game, and already exists in the template's main.js.
+defineMod() is the entrypoint to making a game with TMT. It should be called once per game, and already exists in the template's main.js. It expects an object of the properties listed below.
 
-All callbacks within defineMod() can be declared with a `context` argument to access relevant mod or layer context unless otherwise stated.
+All callbacks within defineMod() can be defined with a `context` argument to access relevant mod or layer context unless otherwise stated.
 
 ## Properties
-defineMod() expects an object with certain properties:
-- info
-- layers
-- pointGain
-it may also contain certain optional properties: 
-- nodes
-- ui
-- simulation
-- canGeneratePoints
-- update
-- endgame
-- winText
-- saveVersion
-- migrateSave
-### info
-The info property should be an object with certain properties:
-- id: A string ID given to your game. It should be unique and is used in determining the location of your game's save data in LocalStorage.
-- name: A string used to name your game.
-- author: A string used to attribute your game to you, displayed in a few places.
-- version: A string used to determine the **displayed** version fo your game. It should not be used for determining if or when saved data needs a migration.
-- pointsName: A string used to determine what the main currency is called in your game.
-- initialPoints: A DecimalSource value used to determine how much of your main currency a new player starts with.
-- startLayer: A LayerHandle value used to determine which of your layers are displayed initially.
-it may also contain an optional property:
-- offlineLimitHours: A number used to determine how long players may be offline for before progress stops accumulating. Defaults to 1
-### layers
-The layers property should be an array of LayerHandle values. Layers created with defineLayer() but excluded from this array will not be used in any way at runtime, which will likely lead to issues.
-### pointGain
-The pointGain property should be a DecimalSource value or a DecimalSource-returning callback. It is used to determine how much of the main currency is gained per second.
-### nodes 
-The nodes property should be an array of NodeHandle values. Nodes created with defineNode() but excluded from this array will not be used in any way at runtime, which will likely lead to issues.
-### ui
-The ui property should be an object with any of these optional properties:
-- mode: "tree" or "single", this controls whether the typical layer tree is shown in your game. Defaults to "tree".
-- backgroundStyle: A style object or style object-returning callback that controls the style of the background of a page. Defaults to nothing.
-- notifications: The notifications property should be an object with any of these optional properties:
-    - enabled: A boolean value that controls whether notifications show up at all. Defaults to true.
-    - maxVisible: A number value that controls how many notifications can be on screen at once. Defaults to 3.
-    - durationMs: A number that controls how long a notification remains visible for, in milliseconds. Defaults to 3000.
-### simulation
-The simulation property should be an object with any of these optional properties:
-- intervalMs: A number that controls how long a single "tick" is. Defaults to 50. Must be between 0 and 2147483647.
-- maxTickSeconds: A number that controls how long a single online tick can take. Defaults to 3600. Must be positive.
-### canGeneratePoints
-The canGeneratePoints property should be a boolean value or a boolean-returning callback. When false, all main currency gain is skipped.
-### update
-The update property should be a void callback. It is run every tick immediately after main currency gain. Optionally, it can be declared with a `delta` argument which can be used as a delta-time multiplier. 
-### endgame
-The endgame property should be a boolean or boolean-returning callback. When endgame is evaluated to true and a user has not already seen the endgame panel, the endgame panel is shown. Defaults to false.
-### winText
-The winText property should be a string or string-returning callback. Its content is displayed on the endgame panel. It can contain arbitrary HTML strings. Defaults to "You won!".
-### saveVersion
-The saveVersion property should be a positive integer. It is used for determining if a loaded save requires migration. It should not be confused with `ui.version`, the displayed mod version. If it defined and greater than 1, migrateSave is a required property of defineMod; if migrateSave is not needed, saveVersion should not be incremented. Defaults to 1.
-### migrateSave
-The migrateSave property should be a void callback. It must be defined with arguments of `state` and `fromVersion`; `state` is used to access player state immediately after load, `fromVersion` is used to access the saveVersion of the save that has been loaded. migrateSave may not be defined with a `context` argument. migrateSave should be used when an update has required old save data to be updated to remain compatible with your game. After a successful migrateSave call, a save's stored saveVersion is updated to your defined saveVersion. 
+
+### info {type: ModInfo} {required}
+
+The info property accepts the following properties:
+
+- `id` {type: string} {required}\
+  Sets the location of your game's saved data in LocalStorage.
+- `name` {type: string} {required}\
+  Names your game.
+- `author` {type: string} {required}\
+  Names you!
+- `version` {type: string} {required}\
+  The **displayed** version of your game. Should not be used for save migration, see `saveVersion`.
+- `pointsName` {type: string} {required}\
+  Names the main currency of your game.
+- `initialPoints` {type: DecimalSource} {required}\
+  The starting main currency amount for a new player. Must be finite.
+- `startLayer` {type: LayerHandle} {required}\
+  The initially selected layer. Its initial `unlocked` state defaults to `true`, but all other layers default to `false`.
+- `offlineLimitHours` {type: number} {optional}\
+  Maximum allowed offline time, in hours. Must be finite. Defaults to `1`.
+
+### layers {type: LayerHandle[]} {required}
+
+All handles created by a `defineLayer` call should be included here. Handles not included here will not appear in-game or be loaded by the engine at all.
+
+Order in this array determines the position of a layer within its row if the layer's `tree.position` if not defined.
+
+### pointGain {type: DecimalSource} {required} {callback}
+
+Main currency gained per second. Must be finite. Actual gain is calculated as `pointGain * delta`.
+
+### nodes {type: NodeHandle[]} {optional}
+
+All handles created by a `defineNode` call should be included here. Handles not included here will not appear in-game or be loaded by the engine at all. Defaults to `[]`.
+
+### ui {type: ModUiDefinition} {optional}
+
+The ui property configures how a game looks and accepts the following properties:
+
+- `mode` {type: "tree" | "single"} {optional}\
+  Defaults to `"tree"`, showing the tree beside the active page on wide screens. `"single"` hides the tree and displays only the active page. Deep embeds can display two pages in either mode.
+- `backgroundStyle` {type: Record<string, string | number | undefined>} {optional} {callback}\
+  CSS properties applied to the outer game wrapper. Defaults to nothing.
+- `notifications` {type: NotificationDefinition} {optional}\
+  Configures popup messages, including completion popups and messages requested with `context.popup`. Tree and tab glows have their own settings.
+  - `enabled` {type: boolean} {optional}\
+    Controls whether popups are visible. Defaults to `true`. `false` does not prevent popup hooks from running.
+  - `maxVisible` {type: number} {optional}\
+    Maximum popups visible. Must be a positive integer. Defaults to `3`. Adding popups above this amount removes the oldest one.
+  - `durationMs` {type: number} {optional}\
+    Default popup lifetime in milliseconds. Must be an integer from `1` through `2147483647`. Defaults to `3000`. An individual popup can override this.
+
+### simulation {type: SimulationDefinition} {optional}
+
+The ui property configures how a game's simulation runs and accepts the following properties:
+
+- `intervalMs` {type: number} {optional}\
+  "Tick speed", in milliseconds. Must be an integer from `1` through `2147483647`. Defaults to `50`.
+- `maxTickSeconds` {type: number} {optional}\
+  Maximum possible length of a single tick, in seconds. Must be finite and positive. Defaults to `3600`. This cap does not apply to offline progress.
+
+### canGeneratePoints {type: boolean} {optional} {callback}
+
+Defaults to `true`. When `false`, skips `pointGain` evaluation and the main currency addition, and displays zero point gain in the header.
+
+### update {type: void} {optional} {callback-only}
+
+Used to define arbitrary per-tick behavior. Can be defined with an additional argument of `delta`, used to measure elapsed time.
+
+### endgame {type: boolean} {optional} {callback}
+
+Defaults to `false`. A `true` value sets `context.player.won`, saves the game, shows the endgame panel, and pauses simulation and autosaving until the player chooses to "Keep Going!". 
+
+Once "Keep Going!" has been selected, this condition is no longer evaluated.
+
+### winText {type: string} {optional} {callback} {html}
+
+Content displayed on the endgame panel. Defaults to `"You won!"`.
+
+### saveVersion {type: number} {optional}
+
+The actual save data version. Must be a positive safe integer. Defaults to `1`. Increment it **only** when you have made changes causing saved state needs migration. This is separate from the displayed `info.version`.
+
+### migrateSave {type: any} {required when: saveVersion > 1} {callback-only}
+
+Migrates saved state and returns that migrated state.
+
+Its arguments are:
+
+- `state` {type: any} {required}\
+  Decoded saved state, containing the saved `player` and `layers` fields.
+- `fromVersion` {type: number} {required}\
+  The save’s original saveVersion. Use it to choose the migrations needed to reach your current `saveVersion`. One call must apply every needed migration.
+
+Defaults are created after migration. Remove or rename obsolete layer and feature IDs, unknown IDs are rejected. Removing a custom field permanently also requires removing its initializer from `startState`.
+
+## Examples
+
+### Renaming Saved Custom State
+
+Suppose version 1 stored `energy` on the `prestige` layer and version 2 calls it `charge`. Update that layer’s `startState` and gameplay code to use `charge`, then add these fields to the mod definition:
+
+```js
+saveVersion: 2,
+migrateSave(state, fromVersion) {
+    if (fromVersion < 2) {
+        const layers = state.layers;
+        const layer = layers.prestige;
+        const { energy, ...remainingFields } = layer;
+
+        return {
+            ...state,
+            layers: {
+                ...layers,
+                prestige: { ...remainingFields, charge: energy }
+            }
+        };
+    }
+
+    return state;
+}
+```

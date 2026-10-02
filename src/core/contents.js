@@ -40,11 +40,23 @@ export function renderTableOfContents(page) {
                     type="button"
                     data-section-number="${section.dataset.sectionNumber}"
                 >
-                    ${section.textContent}
+                    ${escapeHtml(getSectionLabel(section))}
                 </button>
             `).join("")}
         </div>
     `;
+}
+
+function getSectionLabel(section) {
+    const label = section.cloneNode(true);
+    label.querySelectorAll(".badge").forEach(badge => badge.remove());
+    return label.textContent.trim();
+}
+
+function escapeHtml(text) {
+    return text.replace(/[&<>"]/g, character => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"
+    })[character]);
 }
 
 export function initTableOfContents() {

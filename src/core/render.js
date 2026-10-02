@@ -2,6 +2,7 @@ import MarkdownIt from "markdown-it";
 import hljs from "highlight.js";
 import anchor from "markdown-it-anchor";
 import container from "markdown-it-container";
+import initBadges from "./badges.js";
 
 function createContainer(markdown, name, defaultTitle){
     markdown.use(container, name, {
@@ -26,6 +27,8 @@ export const markdown = new MarkdownIt({
     }
 });
 
+markdown.use(initBadges);
+
 markdown.use(anchor, {
     permalink: false
 });
@@ -43,5 +46,3 @@ export function getMarkdownTitle(source, fallback) {
     const match = source.match(/^#\s+(.+)$/m);
     return match ? match[1].trim() : fallback;
 }
-
-
