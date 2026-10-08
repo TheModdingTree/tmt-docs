@@ -58,6 +58,16 @@ button {
     counter-reset: section;
 }
 
+#siteCredit {
+    position: fixed;
+    right: 8px;
+    bottom: 12px;
+    width: 15rem;
+    color: var(--text-medium);
+    font-size: 0.7rem;
+    text-align: right;
+}
+
 #contents {
     max-height: calc(100dvh - 5rem);
 }
@@ -407,6 +417,12 @@ button {
 }
 
 @media (max-width: 960px) {
+    #siteCredit {
+        position: static;
+        width: auto;
+        margin: 1.5rem 1rem 1rem;
+    }
+
     #mobileMenuShow {
         display: block;
     }
