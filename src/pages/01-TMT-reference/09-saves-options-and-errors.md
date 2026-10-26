@@ -1,4 +1,4 @@
-# Saves and Errors
+# Saves, Options, and Errors
 
 The engine saves player state and player options together, with exact save behavior described below.
 
@@ -52,6 +52,8 @@ Time between autosaves, in milliseconds. Must be an integer from `1` through `21
 Allows offline progress. Defaults to `true`.
 - `hotkeysEnabled` {type: boolean} {required}\
 Allows gameplay hotkeys. Defaults to `true`. Engine Ctrl+S remains available regardless.
+- `hqTree` {type: boolean} {required}\
+Display the High-Quality Tree. Defaults to `false`.
 - `hideCompletedChallenges` {type: boolean} {required}\
 Hides maxed challenges unless they are active. Defaults to `false`.
 - `confirmHardReset` {type: boolean} {required}\

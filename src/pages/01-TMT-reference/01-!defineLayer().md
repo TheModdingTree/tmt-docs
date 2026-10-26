@@ -169,9 +169,9 @@ Shows a star when `true`, a custom image when given a URL, or no marker when `fa
 - `image` {type: string} {optional} {callback}\
 A URL controlling the image displayed on the layer’s tree button. Defaults to no image, instead displaying the layer's symbol.
 - `actionGlowColor` {type: string} {optional} {callback}\
-A CSS color for actionable item notifications. Defaults to `"white"`.
+A CSS color for actionable item notifications. Defaults to `"red"`.
 - `resetGlowColor` {type: string} {optional} {callback}\
-A CSS color for reset notifications. Defaults to `"red"`.
+A CSS color for reset notifications. Defaults to `"white"`.
 - `style` {type: StyleValue} {optional} {callback}\
 Styles the tree button. Its properties override matching values from `ui.componentStyles["tree-node"]`. Defaults to no additional styles.
 - `class` {type: ClassValue} {optional} {callback}\
@@ -300,9 +300,9 @@ retention: context => ({
 
 Runs as `onReset(context)` for the source of a reset and for each incoming target after its state is reset. The context’s `layerState` belongs to that target. See [Reset Contexts](01/06?s=reset-contexts) for the reset metadata available here and while evaluating `retention`.
 
-An ordinary prestige grants source currency, updates best and total, runs the source hook, resets targets in lower rows, resets the base resource, and resets the source’s timer. The source itself is not reset.
+An ordinary prestige grants source currency, updates best and total, runs the source hook, awards milestones and achievements, resets targets in lower rows, resets the base resource, and resets the source’s timer. The source itself is not reset.
 
-`context.forceReset({})` grants no currency and defaults to preserving source state. `context.forceReset({ resetSource: true })` resets the source after incoming targets and then calls its hook. Challenge entry and exit also reset their source while preserving that source’s challenge completion history.
+`context.forceReset({})` grants no currency and defaults to preserving source state. `context.forceReset({ resetSource: true })` resets the source after incoming targets and then calls its hook. Challenge entry and exit grant no currency.
 
 ## setup: the ui property {type: object} {optional}
 
@@ -383,8 +383,9 @@ Use `type: "toggle"` for a setting backed by layer state:
 
 - `label` {type: string} {required} {callback} {html}\
 Label beside the control.
-- `binding` {type: ValueBinding<boolean>} {required}\
-Connects the control to backing state.
+- `value` {type: BooleanStateKey | ValueBinding<boolean>} {required}\
+A top-level boolean field name from this layer's state, such as `"automation"`, or a value binding.
+An explicit binding uses:
   - `get` {type: boolean} {required} {callback-only}\
   Runs as `get(context)` to read the current setting.
   - `set` {type: void} {required} {callback-only}\
@@ -532,6 +533,8 @@ Controls the main text displayed on an upgrade.
 Text describing the upgrade’s effect, shown below its description.
 - `fullDisplay` {type: string} {required when: description is omitted} {callback} {html}\
 Replaces the normal upgrade title, description, effect text, and cost display.
+- `row` {type: number} {optional}\
+A nonnegative integer, default `0`. Unused rows do not add blank space. Explicit section `ids` and item-tree `rows` take precedence.
 - `cost` {type: DecimalSource} {required} {callback}\
 Controls how much of a given currency a player must spend to purchase an upgrade.
 - `currency` {type: DecimalResource} {optional}\
@@ -545,7 +548,7 @@ Runs as `pay(context, cost)` and overrides the default currency deduction. Owner
 - `onPurchase` {type: void} {optional} {callback-only}\
 Runs when an upgrade is purchased.
 - `effect` {type: any} {optional} {callback-only}\
-Computes the effect returned by `context.getUpgradeEffect(id)`.
+Computes the effect read by `context.getUpgradeEffect(id)` for application or `context.previewUpgradeEffect(id)` for display.
 
 ### buyables {type: Record<string, BuyableDefinition>} {optional}
 
@@ -587,6 +590,8 @@ Runs as `onPurchase(context)` after a successful buy-one operation, including a 
 Computes the effect returned by `context.getBuyableEffect(id)`.
 
 Buying one checks availability, cost, and the purchase limit, then pays, increments the amount, and runs `onPurchase`. Custom `buy` controls the payment and increment. A resulting amount above the current limit is rejected rather than clamped.
+
+Holding the main button repeatedly triggers normal `buy`.
 
 ### buyableRespec {type: BuyableRespecDefinition} {optional}
 
@@ -648,7 +653,7 @@ Completion threshold compared with `goalResource`. Must be finite and nonnegativ
 Resource checked against `goal`. Defaults to the layer’s own currency.
 - `canComplete` {type: boolean} {required when: goal is omitted} {callback}\
 Determines completion eligibility, replacing the resource-versus-goal check.
-- `completionLimit` {type: number} {optional}\
+- `completionLimit` {type: number} {optional} {callback}\
 Maximum completions. Defaults to `1`. Use a nonnegative integer or `Infinity` for no cap.
 - `completionGain` {type: number} {optional} {callback}\
 Completions awarded per successful completion. Defaults to `1`. Must be a nonnegative integer. Awards are capped by the remaining limit.
@@ -674,8 +679,6 @@ Styles the challenge.
 Applies classes to the challenge.
 - `mark` {type: boolean | string} {optional} {callback}\
 Overrides the completion marker. The default shows a star for a maxed challenge with a completion limit above `1`. Use `false` to hide it.
-
-Entry and exit reset the source layer and reset its targets. The source layer’s challenge completion history survives both operations independently of ordinary retention.
 
 `context.completeChallenge(id)` awards progress while leaving the challenge active. The stock "Complete" button calls `exitChallenge`, so it also exits and resets.
 
@@ -713,8 +716,9 @@ Runs as `onComplete(context)` after ownership is recorded, before its completion
 Controls displayed alongside an earned milestone. Defaults to `[]`. Each toggle uses these fields:
   - `label` {type: string} {required} {callback}\
   Text beside the toggle.
-  - `value` {type: ValueBinding<boolean>} {required}\
-  Connects the toggle to backing state:
+  - `value` {type: BooleanStateKey | ValueBinding<boolean>} {required}\
+  A top-level boolean field name from this layer's state, such as `"automation"`, or an explicit binding.\
+  An explicit binding uses:
     - `get` {type: boolean} {required} {callback-only}\
     Runs as `get(context)` to read the current setting.
     - `set` {type: void} {required} {callback-only}\

@@ -42,6 +42,8 @@ Engine field overrides accepted by `startState`.
 Tree visibility behavior.
 - `TreeRow` {type: number | "left" | "right"}\
 Visual tree placement.
+- `BooleanStateKey<State>` {type: boolean field names}\
+Top-level boolean keys in a layer's state, accepted by milestone and layout toggle `value` shorthands.
 - `ValueBinding<Value, ReadContext, WriteContext>` {type: object}\
 Connects an input to backing state through the following callbacks:
   - `get` {type: Value} {required} {callback-only}\
@@ -56,11 +58,13 @@ These names can be imported with `import type` in TypeScript. Generic `State` pa
 | Exported types | Reference |
 | --- | --- |
 | `Decimal`, `DecimalSource`, `ReadonlyDecimal` | [Decimal](01/04) |
+| `ConsoleApi`, `ConsoleSnapshot` | [Read and Edit State from the Console](03?s=read-and-edit-state-from-the-console) |
 | `PlayerState` | [Main Player Context](01/06?s=main-player-context) |
 | `LayerCoreState`, `LayerInitialState`, `LayerState` | [defineLayer’s startState](01/01?s=2) |
 | `StyleValue`, `ClassValue` | [Styling](01/11) |
-| `Computable`, `DeepReadonly`, `LayerHandle`, `AnyLayerHandle`, `NodeHandle`, `TreeNodeHandle`, `DecimalResource`, `Shown`, `TreeRow`, `ValueBinding` | Shared Types above |
+| `Computable`, `DeepReadonly`, `LayerHandle`, `AnyLayerHandle`, `NodeHandle`, `TreeNodeHandle`, `DecimalResource`, `Shown`, `TreeRow`, `BooleanStateKey`, `ValueBinding` | Shared Types above |
 | `ModDefinition`, `ModInfo`, `ModUiDefinition`, `SimulationDefinition` | [defineMod](01/00) |
+| `ShellLayoutNode`, `ShellTab` | [Custom Shell Layout](01/00?s=custom-shell-layout) |
 | `ResourceDefinition` | [defineResource](01/03) |
 | `NodeDefinition` | [defineNode](01/02) |
 | `TreeNodeOptions<Context>`, `TreeConnection`, `TreeConnectionDefinition`, `HotkeyDefinition<State>`, `LayerUiDefinition<State>` | [defineLayer](01/01) |

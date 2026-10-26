@@ -110,8 +110,6 @@ challenges: {
 
 In the mod's `pointGain`, use `context.inChallenge("11", prestige)` for the penalty and `context.getChallengeEffect("11", prestige) ?? 1` for the reward multiplier.
 
-Challenge entry and exit reset their source layer while preserving its completion history. Check any old `doReset` special cases and move the needed preservation into retention. `countsAs` matches the listed challenges directly, it does not recursively trigger.
-
 ## Milestones and Achievements
 
 Keep milestone `requirementDescription`, `effectDescription`, and `done`, and add context to callbacks. Achievement `name` becomes `title`. Use `description` for an achievement explanation.

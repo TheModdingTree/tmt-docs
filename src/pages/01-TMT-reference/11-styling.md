@@ -53,8 +53,13 @@ The root `#tmt` defines:
 | `--tmt-complete` | `#77bf5f` | Completed Color |
 | `--tmt-border` | `#ffffff30` | Light Border Color |
 | `--tmt-border-dark` | `#00000020` | Dark Border Color |
+| `--tmt-tree-border-width` | `4px` | Tree Node Border Width |
+| `--tmt-tree-inset-shadow` | `-4px -4px 4px rgba(0, 0, 0, 0) inset` | Tree/Tab Inset Shadow |
+| `--tmt-tree-text-shadow` | `none` | Tree Node Text Shadow |
 
-Layer pages set `--tmt-layer-color`, and notifications set `--tmt-notification-color`.
+Layer pages set `--tmt-layer-color`, and their displayed currency amount has a `0px 0px 10px` text shadow in that color. Notifications set `--tmt-notification-color`.
+
+The saved [High-Quality Tree option](01/09?s=player-options), off by default, gives `tmt-game` the `tmt-high-quality-tree` class. It sets the border width to `2px`, the inset shadow to `-4px -4px 4px rgba(0, 0, 0, 0.25) inset`, and node text shadow to `2px 2px 4px rgba(0, 0, 0, 0.25)`. Nodes also get a `0px 0px 20px` background-colored glow. Layer-node hover keeps the bevel alongside its white glow; standalone-node hover uses the ordinary white glow, as in tmt-old. Tree/tab notification glows keep the bevel and their existing outer glow. Individual node styles can override these defaults.
 
 ```css
 #tmt {
@@ -72,6 +77,8 @@ All engine styles are scoped beneath `#tmt`.
 | --- | --- |
 | `data-tmt-layer` | Layer pages, peeks, and layer tree buttons. Based on Layer ID |
 | `data-tmt-node` | Tree buttons. Based on Layer or Node ID |
+| `data-tmt-shell` | Custom shell node containers|
+| `data-tmt-shell-tab` | Shell tab buttons|
 | `data-tmt-tab` | Tab buttons. Based on Tab ID|
 | `data-tmt-item` | Feature buttons. Based on Item ID or Grid Key|
 | `data-tmt-section` | Collection and item-tree sections. Based on item/feature name |
@@ -90,7 +97,8 @@ These attributes can be used to control selected items only:
 
 | Area | Classes |
 | --- | --- |
-| Shell | `tmt-game`, `tmt-navigation`, `tmt-split`, `tmt-deep`, `tmt-header`, `tmt-panel-buttons`, `tmt-info-button`, `tmt-version`, `tmt-points`, `tmt-point-gain` |
+| Shell | `tmt-shell`, `tmt-panel-button`, `tmt-game`, `tmt-navigation`, `tmt-split`, `tmt-deep`, `tmt-header`, `tmt-panel-buttons`, `tmt-info-button`, `tmt-version`, `tmt-points`, `tmt-point-gain` |
+| Custom shell | `tmt-shell-node`, `tmt-shell-row`, `tmt-shell-column`, `tmt-shell-text`, `tmt-shell-button`, `tmt-shell-tree`, `tmt-shell-tabs` |
 | Layer | `tmt-layer-page`, `tmt-main`, `tmt-reset-button`, `tmt-back`, `tmt-feature-section`, `tmt-section-title` |
 | Purchases and actions | `tmt-upgrade`, `tmt-buyable-group`, `tmt-buyable`, `tmt-buyable-actions`, `tmt-respec-button`, `tmt-clickable` |
 | Progression | `tmt-challenge`, `tmt-milestone`, `tmt-achievement` |
@@ -99,7 +107,7 @@ These attributes can be used to control selected items only:
 | Layout | `tmt-layout-node`, `tmt-layout-section`, `tmt-layout-text`, `tmt-layout-image`, `tmt-layout-spacer`, `tmt-layout-toggle`, `tmt-layout-row`, `tmt-layout-column`, `tmt-layout-tabs`, `tmt-layout-embed`, `tmt-tabs`, `tmt-tab-panel`, `tmt-peek`, `tmt-embed-blocked`, `tmt-spacer`, `tmt-toggle` |
 | Trees | `tmt-tree-viewport`, `tmt-tree`, `tmt-compact-tree`, `tmt-tree-center`, `tmt-tree-row`, `tmt-tree-rail`, `tmt-tree-left`, `tmt-tree-right`, `tmt-tree-slot`, `tmt-tree-node`, `tmt-item-tree`, `tmt-item-tree-content`, `tmt-item-tree-row`, `tmt-branch-container`, `tmt-branches` |
 | Feedback | `tmt-popup-stack`, `tmt-popup`, `tmt-modal`, `tmt-modal-actions`, `tmt-tooltip-anchor`, `tmt-tooltip`, `tmt-tooltip-layer` |
-| Panels and recovery | `tmt-options-panel`, `tmt-info-panel`, `tmt-save-controls`, `tmt-save-error`, `tmt-form-error`, `tmt-recovery`, `tmt-endgame`, `tmt-raw-export`, `tmt-hidden` |
+| Panels and recovery | `tmt-back`, `tmt-engine-panel`, `tmt-options-panel`, `tmt-info-panel`, `tmt-changelog-panel`, `tmt-save-controls`, `tmt-save-error`, `tmt-form-error`, `tmt-recovery`, `tmt-endgame`, `tmt-raw-export`, `tmt-hidden` |
 
 ### State Classes
 

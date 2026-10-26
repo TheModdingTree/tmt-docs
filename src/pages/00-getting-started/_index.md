@@ -9,7 +9,7 @@ You don't need to know the whole engine before starting. Some familiarity with J
 ## Start Here
 
 1. [Creating a Game](00/00) gets the template onto your computer and running in your browser.
-2. [Project Tour](00/01) shows you which files you'll work with.
+2. [A Brief Template Tour](00/01) shows you which files you'll work with.
 3. [Configuring Your Game](00/02) gives the game its own identity and explains point generation.
 4. [Layers and Upgrades](00/03) explains the template's prestige layer and adds its first upgrade.
 5. [Custom State and Clickables](00/04) adds energy and a button which spends it.

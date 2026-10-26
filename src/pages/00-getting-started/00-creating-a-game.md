@@ -92,4 +92,4 @@ Keep the runtime running while you edit. Save your file in the editor, then refr
 
 For more help with loading errors, saves, or gameplay problems, see [Troubleshooting](03).
 
-Next, take a [brief tour of the project](00/01).
+Next, take a [brief tour of the template](00/01).

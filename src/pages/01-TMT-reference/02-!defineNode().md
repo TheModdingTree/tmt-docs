@@ -76,9 +76,9 @@ Controls action glow. Defaults to no glow.
 - `resetNotify` {type: boolean} {optional} {callback: boolean | undefined}\
 Controls reset glow. Defaults to no glow.
 - `actionGlowColor` {type: string} {optional} {callback}\
-Action glow color. Defaults to `"white"`.
+Action glow color. Defaults to `"red"`.
 - `resetGlowColor` {type: string} {optional} {callback}\
-Reset glow color. Defaults to `"red"`.
+Reset glow color. Defaults to `"white"`.
 
 Action glow takes priority.
 

@@ -4,6 +4,8 @@ TMT uses `break_eternity.js`'s Decimal class for engine quantities. It supports 
 
 After reading this page, you'll want to see [Formatting](01/05) for TMT's display helpers and [defineResource](01/03) for using a quantity as currency.
 
+After a successful game startup, the browser console also exposes `Decimal` as this same constructor. See [Read and Edit State from the Console](03?s=read-and-edit-state-from-the-console).
+
 ## Values
 
 - `DecimalSource` {type: Decimal | ReadonlyDecimal | number | string}\

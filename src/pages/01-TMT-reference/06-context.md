@@ -155,6 +155,14 @@ Checks purchased ownership while the layer is active. Deactivation makes it retu
 
 Returns a copy of the saved amount, including while the layer is deactivated.
 
+### getBuyableCost(id, layer) {type: Decimal}
+
+Returns a copy of the current cost, including while the layer is deactivated.
+
+### canBuyBuyable(id, layer) {type: boolean}
+
+Checks whether a buy-one purchase is currently eligible. For a buyable to be purchasable: its layer must be unlocked and not deactivated, the buyable must be unlocked, its amount must be below the purchase limit, its `canAfford` condition must be satisfied, and the currency used in its cost must be sufficient.
+
 ### getClickableState(id, layer) {type: any}
 
 Reads the current clickable value.
@@ -201,6 +209,14 @@ Reads the form's saved value or calls its binding getter. Sliders return a value
 Missing effects and effects suppressed by deactivation return `undefined`. Feature visibility doesn't automatically gate an effect either.
 
 Dynamic getters expose `any` in the current SDK so ordinary JavaScript code can consume authored values without annotations.
+
+### previewUpgradeEffect(id, layer) {type: any}
+
+:::warning Unsafe Effect Access
+`previewUpgradeEffect(id, layer)` is intended for **display use only**. Using it for gameplay calculations allows a locked effect to be applied without error. Always use `getUpgradeEffect(id, layer)` for gameplay calculations.
+:::
+
+Evaluates an upgrade's effect regardless of ownership, visibility, or layer deactivation.
 
 ## Changing Resources
 
