@@ -3,11 +3,12 @@
 After the game starts, the browser console exposes a `tmt` API and the `Decimal` constructor.
 
 `tmt.layers` contains registered layer handles.
+`tmt.resources` contains resource handles keyed by resource name. Duplicate names receive numbered suffixes.
 `tmt.snapshot()` returns a detached, readonly `{ player, layers }` object containing a full copy of the current state.
 
 ### tmt.edit
 
-`tmt.edit` can used to directly modify state values. It functions the same as any other engine callback and receives a writable [mod context](01/06).
+`tmt.edit` can be used to directly modify state values. It functions the same as any other engine callback and receives a writable [mod context](01/06).
 
 ```js
 tmt.edit(context => context.stateOf(tmt.layers.p).points = new Decimal(1));

@@ -26,6 +26,7 @@ buyables: {
         title: "Generator",
         cost: context => new Decimal(2).pow(context.getBuyableAmount("11")),
         display: context => `You own ${format(context.getBuyableAmount("11"))} generators`,
+        showAmount: false, // Hides the built-in amount text because this example already includes it in `display`.
         effect: context => context.getBuyableAmount("11").add(1)
     }
 }

@@ -500,6 +500,8 @@ Item display and eligibility calculations receive read-only item contexts with `
 
 Effects supply values for your formulas, they are not magically applied. Missing or inactive effects return `undefined`. Deactivation suppresses active effects while preserving state. Upgrade, challenge, milestone, and achievement effects also depend on earned ownership. Returned effect snapshots are read-only.
 
+For display, each effect getter has a matching `preview[item]Effect` method which bypasses ownership, completion, visibility, and deactivation checks. See [Effect Previews](01/06?s=effect-previews) for the methods and their rules. Use normal getters in gameplay calculations.
+
 The sections below describe each built-in collection and the layer’s grid.
 
 Upgrades, buyables, and clickables share these appearance fields. Other item types support their own subsets:
@@ -568,6 +570,8 @@ Defaults to the layer’s own currency. Controls what currency a buyable uses to
 Controls whether a buyable is displayed.
 - `initialAmount` {type: DecimalSource} {optional}\
 The initial number of buyable levels. Defaults to `0`.
+- `showAmount` {type: boolean} {optional} {callback}\
+Controls whether the default amount display is shown, Defaults to `true`.
 - `purchaseLimit` {type: DecimalSource} {optional} {callback}\
 Caps the amount that can be purchased. Must be finite. Defaults to no cap.
 - `canAfford` {type: boolean} {optional} {callback}\
@@ -646,7 +650,7 @@ Explains the reward.
 - `rewardDisplay` {type: string} {optional} {callback} {html}\
 Shows the current reward effect. Defaults to `""`.
 - `fullDisplay` {type: string} {required when: description, goalDescription, or rewardDescription is omitted} {callback} {html}\
-Replaces the normal title and descriptive content.
+Replaces the normal title, descriptive content, and completion counter.
 - `goal` {type: DecimalSource} {required when: canComplete is omitted} {callback}\
 Completion threshold compared with `goalResource`. Must be finite and nonnegative.
 - `goalResource` {type: DecimalResource} {optional}\
@@ -655,6 +659,8 @@ Resource checked against `goal`. Defaults to the layer’s own currency.
 Determines completion eligibility, replacing the resource-versus-goal check.
 - `completionLimit` {type: number} {optional} {callback}\
 Maximum completions. Defaults to `1`. Use a nonnegative integer or `Infinity` for no cap.
+- `showCompletions` {type: boolean} {optional} {callback}\
+Controls whether the default completion display is shown. Defaults to `true`. Has no effect when `fullDisplay` is supplied.
 - `completionGain` {type: number} {optional} {callback}\
 Completions awarded per successful completion. Defaults to `1`. Must be a nonnegative integer. Awards are capped by the remaining limit.
 - `countsAs` {type: string[]} {optional}\

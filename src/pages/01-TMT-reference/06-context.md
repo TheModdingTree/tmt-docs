@@ -197,26 +197,44 @@ Reads the form's saved value or calls its binding getter. Sliders return a value
 
 ### Effect Getters {type: any}
 
-- `getLayerEffect(layer)` evaluates the layer effect.
-- `getUpgradeEffect(id, layer)` evaluates an owned upgrade's effect.
-- `getBuyableEffect(id, layer)` evaluates a buyable's effect, including at amount zero.
-- `getClickableEffect(id, layer)` evaluates a clickable's effect.
-- `getChallengeEffect(id, layer)` evaluates a challenge's reward after at least one completion.
-- `getMilestoneEffect(id, layer)` evaluates an earned milestone's effect.
-- `getAchievementEffect(id, layer)` evaluates an earned achievement's effect.
-- `getGridEffect(key, layer)` evaluates a grid cell's effect. Also accepts `getGridEffect(row, column, layer)`.
+| Method | Evaluates |
+| --- | --- |
+| `getLayerEffect(layer)` | The layer's effect. |
+| `getUpgradeEffect(id, layer)` | An owned upgrade's effect. |
+| `getBuyableEffect(id, layer)` | A buyable's effect at its current amount, including zero. |
+| `getClickableEffect(id, layer)` | A clickable's effect at its current value. |
+| `getChallengeEffect(id, layer)` | A challenge's reward effect after at least one completion. |
+| `getMilestoneEffect(id, layer)` | An earned milestone's effect. |
+| `getAchievementEffect(id, layer)` | An earned achievement's effect. |
+| `getGridEffect(key, layer)` or `getGridEffect(row, column, layer)` | A grid cell's effect.|
 
 Missing effects and effects suppressed by deactivation return `undefined`. Feature visibility doesn't automatically gate an effect either.
 
 Dynamic getters expose `any` in the current SDK so ordinary JavaScript code can consume authored values without annotations.
 
-### previewUpgradeEffect(id, layer) {type: any}
+### Effect Previews {type: any}
 
 :::warning Unsafe Effect Access
-`previewUpgradeEffect(id, layer)` is intended for **display use only**. Using it for gameplay calculations allows a locked effect to be applied without error. Always use `getUpgradeEffect(id, layer)` for gameplay calculations.
+The `preview[item]Effect` methods are intended for **display use only**. They bypass ownership, completion, visibility, and layer deactivation checks. Always the matching `get[item]Effect` method for gameplay calculations.
 :::
 
-Evaluates an upgrade's effect regardless of ownership, visibility, or layer deactivation.
+| Method | Evaluates |
+| --- | --- |
+| `previewLayerEffect(layer)` | The layer's effect. |
+| `previewUpgradeEffect(id, layer)` | A upgrade's effect, regardless of ownership.|
+| `previewBuyableEffect(id, layer)` | A buyable's effect at its current amount, including zero.|
+| `previewClickableEffect(id, layer)` | A clickable's effect at its current value. |
+| `previewChallengeEffect(id, layer)` | A challenge's reward effect, regardless of completions. |
+| `previewMilestoneEffect(id, layer)` | A milestone's effect, regardless of completion. |
+| `previewAchievementEffect(id, layer)` | A achievement's effect, regardless of completion. |
+| `previewGridEffect(key, layer)` or `previewGridEffect(row, column, layer)` | A grid cell's effect.|
+
+For example, a challenge's `rewardDisplay` can show its reward before the player earns a completion:
+
+```js
+effect: () => 2,
+rewardDisplay: context => `Reward: ${context.previewChallengeEffect(context.id)}`
+```
 
 ## Changing Resources
 
